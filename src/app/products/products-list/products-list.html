@@ -1,23 +1,9 @@
-<div class="table__wrapper products">
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Calories</th>
-        <th>Unit</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Bulka</td>
-        <td>300 kcal</td>
-        <td>100 g</td>
-      </tr>
-      <tr>
-        <td>Bulka czosnkowa</td>
-        <td>600 kcal</td>
-        <td>100 g</td>
-      </tr>
-    </tbody>
-  </table>
+<div class="list-group mt-3">
+  @for(product of products(); track product.id) {
+  <a
+    [routerLink]="['#']"
+    class="list-group-item list-group-item-action d-flex justify-content-between"
+    >{{ product.name }}<i class="bi bi-chevron-right"></i
+  ></a>
+  }
 </div>

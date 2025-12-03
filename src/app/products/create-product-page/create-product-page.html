@@ -1,30 +1,108 @@
-<div class="form__wrapper">
-  <form class="form">
-    <h2>Add product</h2>
-    <div class="form__group">
-      <label for="name">Name</label>
-      <input type="text" id="name" />
+<h2>Add product</h2>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="mb-3">
+    <label for="name" class="form-label">Name</label>
+    <input
+      type="text"
+      id="name"
+      class="form-control"
+      [class.is-invalid]="name?.invalid && (name?.dirty || name?.touched)"
+      formControlName="name"
+    />
+    @if (name?.invalid && (name?.dirty || name?.touched)) {
+    <div class="invalid-feedback">
+      @if (name?.hasError('required')) {
+      <p>Field is required</p>
+      } @if (name?.hasError('maxlength')) {
+      <p>Field max length is 200 characters</p>
+      }
     </div>
-    <div class="form__row">
-      <div class="form__group">
-        <label for="unit">Unit</label>
-        <select id="unit">
-          <option>g</option>
-          <option>ml</option>
-        </select>
+    }
+  </div>
+  <div class="row mb-3">
+    <div class="col-6">
+      <label for="unit" class="form-label">Unit</label>
+      <select
+        id="unit"
+        class="form-control"
+        formControlName="unit"
+        [class.is-invalid]="unit?.invalid && (unit?.dirty || unit?.touched)"
+      >
+        <option selected value="0">Grams (g)</option>
+        <option value="1">Milliliters (ml)</option>
+      </select>
+      @if (unit?.invalid && (unit?.dirty || unit?.touched)) {
+      <div class="invalid-feedback">
+        @if (name?.hasError('required')) {
+        <p>Field is required</p>
+        }
       </div>
-      <div class="form__group">
-        <label for="unitAmount">Unit amount</label>
-        <input type="text" id="unitAmount" />
-      </div>
-      <div class="form__group">
-        <label for="calories">Calories per unit</label>
-        <input type="text" id="calories" />
-      </div>
+      }
     </div>
-    <div class="form__actions">
-      <button type="button" class="btn">Cancel</button>
-      <button type="submit" class="btn">Add</button>
+    <div class="col-6">
+      <label for="unitAmount" class="form-label">Unit amount</label>
+      <input
+        type="text"
+        id="unitAmount"
+        class="form-control"
+        formControlName="unitAmount"
+        [class.is-invalid]="unitAmount?.invalid && (unitAmount?.dirty || unitAmount?.touched)"
+      />
+      @if (unitAmount?.invalid && (unitAmount?.dirty || unitAmount?.touched)) {
+      <div class="invalid-feedback">
+        @if (unitAmount?.hasError('required')) {
+        <p>Field is required</p>
+        } @if (unit?.hasError('min') || unit?.hasError('max')) {
+        <p>Field must be an integer between 0 and 100 000</p>
+        }
+      </div>
+      }
     </div>
-  </form>
-</div>
+  </div>
+  <div class="mb-3">
+    <label for="caloriesPerUnit" class="form-label">Calories per unit</label>
+    <input
+      type="text"
+      id="caloriesPerUnit"
+      class="form-control"
+      formControlName="caloriesPerUnit"
+      [class.is-invalid]="caloriesPerUnit?.invalid && (caloriesPerUnit?.dirty || caloriesPerUnit?.touched)"
+    />
+    @if (caloriesPerUnit?.invalid && (caloriesPerUnit?.dirty || caloriesPerUnit?.touched)) {
+    <div class="invalid-feedback">
+      @if (caloriesPerUnit?.hasError('required')) {
+      <p>Field is required</p>
+      } @if (caloriesPerUnit?.hasError('min') || caloriesPerUnit?.hasError('max')) {
+      <p>Field must be an integer between 0 and 100 000</p>
+      }
+    </div>
+    }
+  </div>
+  <div class="mb-3">
+    <label for="quantity" class="form-label">Quantity</label>
+    <input
+      type="text"
+      id="quantity"
+      class="form-control"
+      formControlName="quantity"
+      [class.is-invalid]="quantity?.invalid && (quantity?.dirty || quantity?.touched)"
+    />
+    @if (quantity?.invalid && (quantity?.dirty || quantity?.touched)) {
+    <div class="invalid-feedback">
+      @if (quantity?.hasError('required')) {
+      <p>Field is required</p>
+      } @if (quantity?.hasError('min') || quantity?.hasError('max')) {
+      <p>Field must be an integer between 0 and 100 000</p>
+      }
+    </div>
+    }
+  </div>
+  <div class="row mt-5">
+    <div class="col-6">
+      <button type="button" class="btn btn-secondary w-100">Cancel</button>
+    </div>
+    <div class="col-6">
+      <button type="submit" class="btn btn-primary w-100">Add</button>
+    </div>
+  </div>
+</form>
