@@ -1,15 +1,21 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Product } from '../product';
+import { ProductService } from '../product-service';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-products-list',
-  imports: [RouterLink],
+  imports: [RouterLink, AsyncPipe],
   templateUrl: './products-list.html',
   styleUrl: './products-list.css',
 })
-export class ProductsList {
-  readonly products = signal([
-    { id: 0, name: 'test 1' },
-    { id: 1, name: 'test 2' },
-  ]);
+export class ProductsList implements OnInit {
+  productService = inject(ProductService);
+  products$: Observable<Product[]> | undefined = undefined;
+
+  ngOnInit() {
+    this.products$ = this.productService.getAll();
+  }
 }
