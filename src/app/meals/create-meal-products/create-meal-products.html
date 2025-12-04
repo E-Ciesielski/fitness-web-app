@@ -1,0 +1,54 @@
+<h2 class="mb-3">Add meal product</h2>
+<div>
+  <input type="text" class="form-control" placeholder="Search..." aria-describedby="search" />
+</div>
+<div class="row my-1">
+  <div class="col-5"><hr /></div>
+  <div class="col-2 d-flex justify-content-center align-items-center">or</div>
+  <div class="col-5"><hr /></div>
+</div>
+<div class="d-grid">
+  <button type="button" class="btn btn-primary">New product</button>
+</div>
+<div class="card my-4">
+  <div class="card-body">
+    <h5 class="card-title">Product</h5>
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" class="form-control" id="name" />
+    </div>
+    <div class="row mb-3">
+      <div class="col-6">
+        <label for="unit" class="form-label">Unit</label>
+        <select id="unit" class="form-control">
+          <option selected value="0">Grams (g)</option>
+          <option value="1">Milliliters (ml)</option>
+        </select>
+      </div>
+      <div class="col-6">
+        <label for="unitAmount" class="form-label">Unit amount</label>
+        <input type="text" class="form-control" id="unitAmount" />
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="caloriesPerUnit" class="form-label">Calories per unit</label>
+      <input type="text" class="form-control" id="caloriesPerUnit" />
+    </div>
+    <div class="mb-3">
+      <label for="quantity" class="form-label">Quantity</label>
+      <input type="text" class="form-control" id="quantity" />
+    </div>
+  </div>
+</div>
+<div class="mb-3">
+  <label for="amount" class="form-label">Amount</label>
+  <input type="text" class="form-control" id="amount" />
+</div>
+<div class="row">
+  <div class="col-6">
+    <a routerLink="/products" type="button" class="btn btn-secondary w-100">Cancel</a>
+  </div>
+  <div class="col-6">
+    <button type="submit" class="btn btn-primary w-100">Add</button>
+  </div>
+</div>

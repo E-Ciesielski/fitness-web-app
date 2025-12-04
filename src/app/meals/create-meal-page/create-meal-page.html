@@ -1,0 +1,53 @@
+<div class="d-flex flex-column h-100">
+  <h2>New meal</h2>
+  <div class="stepper d-flex gap-1 align-items-center my-3">
+    <hr class="divider divider-outer text-primary" />
+    <i class="bi bi-1-circle-fill text-primary" (click)="page.set(1)"></i>
+    <hr class="flex-grow-1 divider" [class.text-primary]="page() == 2" />
+    <i class="bi bi-2-circle-fill" (click)="page.set(2)" [class.text-primary]="page() == 2"></i>
+    <hr class="divider divider-outer" />
+  </div>
+  @if(page() == 1) {
+  <h3>Add ingredients</h3>
+  <div class="d-grid">
+    <button class="btn btn-primary mb-3" (click)="page.set(3)">Add ingredient</button>
+  </div>
+  <div>
+    @for(product of [1,2,3,4,5]; track product) {
+    <div class="card mb-3">
+      <div class="card-body">
+        <div class="d-flex justify-content-between text-break">
+          <h5 class="card-title">Test 2 dsdsa ds d asad</h5>
+          <button type="button" class="btn-close" aria-label="Close"></button>
+        </div>
+        <div>
+          <span class="badge text-bg-primary me-2">300 kcal</span>
+          <span class="badge text-bg-secondary me-2">120 g</span>
+          <span class="badge text-bg-info">140 kcal / 100 g</span>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+  <div class="flex-grow-1"></div>
+  <div class="row">
+    <div class="col-6">
+      <button class="btn btn-secondary w-100">Cancel</button>
+    </div>
+    <div class="col-6">
+      <button class="btn btn-primary w-100" (click)="page.set(2)">Next</button>
+    </div>
+  </div>
+  } @if(page() == 2) {
+  <div>page 2</div>
+  <div class="flex-grow-1"></div>
+  <div class="row">
+    <div class="col-6">
+      <button class="btn btn-secondary w-100" (click)="page.set(1)">Back</button>
+    </div>
+    <div class="col-6">
+      <button class="btn btn-primary w-100">Submit</button>
+    </div>
+  </div>
+  }
+</div>
