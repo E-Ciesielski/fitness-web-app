@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { ProductService } from '../product-service';
+import { Product } from '../product';
 
 @Component({
   selector: 'app-create-product-page',
@@ -9,6 +11,8 @@ import { RouterLink } from '@angular/router';
   styleUrl: './create-product-page.css',
 })
 export class CreateProductPage {
+  private productService = inject(ProductService);
+  private router = inject(Router);
   form = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.maxLength(200)]),
     unit: new FormControl('', [Validators.required]),
@@ -54,6 +58,19 @@ export class CreateProductPage {
       this.form.markAllAsTouched();
       return;
     }
-    console.log(this.form.value);
+    const product = <Product>{
+      id: 0,
+      name: this.name?.value,
+      unit: this.unit?.value,
+      unitAmount: Number(this.unitAmount?.value),
+      caloriesPerUnit: Number(this.caloriesPerUnit?.value),
+      quantity: Number(this.quantity?.value),
+    };
+    this.productService.create(product).subscribe({
+      next: (res) => {
+        this.router.navigateByUrl('/products');
+      },
+      error: (e) => console.error(e),
+    });
   }
 }

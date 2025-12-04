@@ -10,4 +10,8 @@ export class ProductService {
   getAll(): Observable<Product[]> {
     return this.http.get<Product[]>('api/products');
   }
+
+  create(product: Product): Observable<Product> {
+    return this.http.post<Product>('api/products', product);
+  }
 }
